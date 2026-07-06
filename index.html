@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#f5f5f2" />
-    <title>CP17 Radio Listen</title>
+    <title>Void Radio Listen</title>
     <style>
       :root {
         color-scheme: light;
@@ -215,12 +215,12 @@
       <header class="brand">
         <div class="brand-mark">
           <span class="lamp" aria-hidden="true"></span>
-          <span>CP17 Radio</span>
+          <span>Void Radio</span>
         </div>
         <div class="mode" id="mode">LIVE</div>
       </header>
 
-      <section class="card" aria-label="CP17 radio player">
+      <section class="card" aria-label="Void Radio player">
         <div class="frequency" id="frequency">NET</div>
         <div class="station" id="station">网络电台</div>
         <div class="place" id="place">正在读取声音明信片</div>
@@ -234,7 +234,7 @@
 
       <section>
         <div class="story" id="story">
-          一张从 CP17 分享出来的声音明信片。
+          一张从 Void Radio 分享出来的声音明信片。
         </div>
         <div class="coords" id="coords"></div>
       </section>
@@ -254,12 +254,12 @@
       const frequency = text("freq", "NET");
       const now = text("now", "Live stream");
       const mode = text("mode", "live").toUpperCase();
-      const story = text("story", "我在 CP17 发现了一个可以直接收听的网络电台。");
+      const story = text("story", "我在 Void Radio 发现了一个可以直接收听的网络电台。");
       const stream = text("stream", "");
       const lat = text("lat", "");
       const lng = text("lng", "");
 
-      document.title = `${station} · CP17 Radio`;
+      document.title = `${station} · Void Radio`;
       document.getElementById("station").textContent = station;
       document.getElementById("place").textContent = place;
       document.getElementById("frequency").textContent = frequency;
