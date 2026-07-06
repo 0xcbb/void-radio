@@ -161,6 +161,46 @@
         text-overflow: ellipsis;
       }
 
+      .listen-actions {
+        position: relative;
+        margin-top: 18px;
+        display: grid;
+        gap: 10px;
+      }
+
+      .listen-button {
+        appearance: none;
+        border: 0;
+        width: 100%;
+        min-height: 54px;
+        border-radius: 999px;
+        color: white;
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.18), transparent 48%),
+          var(--accent);
+        box-shadow:
+          0 18px 36px rgba(222, 53, 49, 0.32),
+          inset 0 1px 0 rgba(255, 255, 255, 0.28);
+        font: inherit;
+        font-size: 15px;
+        font-weight: 850;
+        cursor: pointer;
+      }
+
+      .listen-button:disabled {
+        cursor: wait;
+        opacity: 0.74;
+      }
+
+      .status {
+        min-height: 18px;
+        color: rgba(255, 255, 255, 0.62);
+        font-size: 12px;
+        line-height: 1.5;
+        font-weight: 720;
+        text-align: center;
+      }
+
       audio {
         position: relative;
         width: 100%;
@@ -201,6 +241,21 @@
         text-align: center;
       }
 
+      .app-link {
+        display: none;
+        width: fit-content;
+        margin: 14px auto 0;
+        border-radius: 999px;
+        padding: 10px 15px;
+        color: var(--ink);
+        background: rgba(255, 255, 255, 0.72);
+        border: 1px solid rgba(32, 35, 34, 0.08);
+        box-shadow: 0 16px 32px rgba(31, 35, 35, 0.1);
+        font-size: 13px;
+        font-weight: 820;
+        text-decoration: none;
+      }
+
       .footer {
         display: flex;
         justify-content: center;
@@ -225,6 +280,12 @@
         <div class="station" id="station">网络电台</div>
         <div class="place" id="place">正在读取声音明信片</div>
         <div class="now" id="now">Live stream</div>
+        <div class="listen-actions">
+          <button class="listen-button" id="playButton" type="button">
+            立即收听
+          </button>
+          <div class="status" id="playStatus">点击后在浏览器中播放直播流</div>
+        </div>
         <audio id="audio" controls preload="none"></audio>
         <div class="fallback" id="fallback">
           如果播放器没有声音，可以打开
@@ -237,6 +298,7 @@
           一张从 Void Radio 分享出来的声音明信片。
         </div>
         <div class="coords" id="coords"></div>
+        <a class="app-link" id="appLink" href="#" rel="noreferrer">获取 Void Radio</a>
       </section>
 
       <footer class="footer">Zero backend sound postcard</footer>
@@ -256,8 +318,13 @@
       const mode = text("mode", "live").toUpperCase();
       const story = text("story", "我在 Void Radio 发现了一个可以直接收听的网络电台。");
       const stream = text("stream", "");
+      const fallback = text("fallback", "");
+      const app = text("app", "");
       const lat = text("lat", "");
       const lng = text("lng", "");
+      const streams = [stream, ...fallback.split("|")]
+        .map((value) => value.trim())
+        .filter((value, index, array) => value && array.indexOf(value) === index);
 
       document.title = `${station} · Void Radio`;
       document.getElementById("station").textContent = station;
@@ -271,12 +338,100 @@
         document.getElementById("coords").textContent = `${lat}, ${lng}`;
       }
 
-      if (stream) {
-        const audio = document.getElementById("audio");
-        const link = document.getElementById("streamLink");
-        audio.src = stream;
-        link.href = stream;
+      const audio = document.getElementById("audio");
+      const link = document.getElementById("streamLink");
+      const playButton = document.getElementById("playButton");
+      const playStatus = document.getElementById("playStatus");
+      let streamIndex = 0;
+      let userStarted = false;
+      let switching = false;
+
+      const setStatus = (value) => {
+        playStatus.textContent = value;
+      };
+
+      const useStream = (index) => {
+        streamIndex = index;
+        audio.src = streams[streamIndex];
+        link.href = streams[streamIndex];
+      };
+
+      const tryPlay = async () => {
+        if (!streams.length) {
+          setStatus("这张声音明信片没有携带可播放直播流。");
+          return;
+        }
+        userStarted = true;
+        playButton.disabled = true;
+        setStatus(streamIndex === 0 ? "正在接入直播流..." : `正在尝试备用流 ${streamIndex + 1}/${streams.length}...`);
+        if (!audio.src) {
+          useStream(0);
+        }
+        try {
+          await audio.play();
+          playButton.textContent = "正在播放";
+        } catch (error) {
+          await tryNextStream();
+        } finally {
+          playButton.disabled = false;
+        }
+      };
+
+      const tryNextStream = async () => {
+        if (switching) return;
+        if (streamIndex + 1 >= streams.length) {
+          playButton.textContent = "重新收听";
+          setStatus("当前直播流暂时不可用，可打开原始直播流再试。");
+          return;
+        }
+        switching = true;
+        useStream(streamIndex + 1);
+        setStatus(`主源不可用，正在尝试备用流 ${streamIndex + 1}/${streams.length}...`);
+        try {
+          await audio.play();
+          playButton.textContent = "正在播放";
+        } catch (error) {
+          switching = false;
+          await tryNextStream();
+          return;
+        }
+        switching = false;
+      };
+
+      if (streams.length) {
+        useStream(0);
         document.getElementById("fallback").style.display = "block";
+      } else {
+        playButton.disabled = true;
+        setStatus("缺少直播流链接。");
+      }
+
+      playButton.addEventListener("click", tryPlay);
+      audio.addEventListener("playing", () => {
+        playButton.textContent = "正在播放";
+        setStatus("直播流已接入");
+      });
+      audio.addEventListener("pause", () => {
+        if (userStarted && !audio.ended) {
+          playButton.textContent = "继续收听";
+          setStatus("已暂停");
+        }
+      });
+      audio.addEventListener("waiting", () => {
+        if (userStarted) setStatus("缓冲直播流...");
+      });
+      audio.addEventListener("error", () => {
+        if (userStarted) {
+          void tryNextStream();
+        } else if (streams.length) {
+          setStatus("直播流需要点击后播放。");
+        }
+      });
+
+      if (app) {
+        const appLink = document.getElementById("appLink");
+        appLink.href = app;
+        appLink.style.display = "block";
       }
     </script>
   </body>

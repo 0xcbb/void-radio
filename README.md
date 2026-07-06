@@ -1,6 +1,6 @@
-# Listen Landing
+# Void Radio Listen Landing
 
-这是声音明信片的零后端公网落地页。
+这是 Void Radio 声音明信片的零后端公网落地页。
 
 ## MVP 部署方式
 
@@ -10,10 +10,10 @@
 - Vercel
 - GitHub Pages
 
-发布后会得到类似 `https://cp17-radio.pages.dev/` 的 HTTPS 地址。Flutter 打包时传入：
+发布后会得到类似 `https://listen.feedar.cc/` 的 HTTPS 地址。Flutter 打包时传入：
 
 ```powershell
-flutter build apk --debug --dart-define=CP17_LISTEN_BASE_URL=https://cp17-radio.pages.dev/
+flutter build apk --debug --dart-define=CP17_LISTEN_BASE_URL=https://listen.feedar.cc/
 ```
 
 如果未来将页面部署到 `/listen/` 路径，则传入：
@@ -26,8 +26,8 @@ flutter build apk --debug --dart-define=CP17_LISTEN_BASE_URL=https://example.com
 
 正式域名不是 MVP 前置条件。建议等分享玩法、文案和可播放率验证稳定后再购买，例如：
 
-- `cp17.radio`
-- `listen.cp17.app`
+- `void.radio`
+- `listen.void.radio`
 - `radio.yourdomain.com`
 
 如果复用现有 `feedar.cc`，建议优先使用子域名，不直接切换主域名根路径，避免影响当前交易系统：
@@ -47,9 +47,11 @@ DNS 层只需要给子域名加 CNAME 到 Cloudflare Pages / Vercel / GitHub Pag
 - `place`：地区
 - `freq`：频率或 NET
 - `stream`：可播放直播流地址
+- `fallback`：备用直播流地址，多个 URL 用 `|` 分隔
 - `now`：当前曲目或直播状态
 - `mode`：`live` / `antipode`
 - `story`：分享故事文案
 - `lat` / `lng`：地图坐标
+- `app`：可选 App 下载 / TestFlight / APK 分发链接；未传时不显示“获取 Void Radio”按钮
 
-注意：微信、WhatsApp 等社交 App 通常不会在聊天卡片里直接播放音频；用户点击链接进入网页后播放，这是平台限制。
+注意：微信、WhatsApp 等社交 App 通常不会在聊天卡片里直接播放音频；用户点击链接进入网页后播放，这是平台限制。移动端浏览器也通常禁止自动播放音频，所以页面必须通过“立即收听”按钮显式调用 `audio.play()`。如果主流播放失败，页面会在同一次用户播放意图下依次尝试 `fallback` 备用流。
