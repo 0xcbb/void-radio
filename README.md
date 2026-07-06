@@ -1,6 +1,6 @@
-# CP17 Listen Landing
+# Listen Landing
 
-这是 CP17 声音明信片的零后端公网落地页。
+这是声音明信片的零后端公网落地页。
 
 ## MVP 部署方式
 
