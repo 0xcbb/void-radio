@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f5f5f2" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='15' fill='%23f6d8d6'/%3E%3Ccircle cx='16' cy='16' r='6' fill='%23de3531'/%3E%3C/svg%3E" />
+    <title>Void Radio Privacy Policy</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --accent: #de3531;
+        --paper: #f6f6f2;
+        --ink: #202322;
+        --muted: #737774;
+        --line: #deded8;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family:
+          Inter, -apple-system, BlinkMacSystemFont, "SF Pro Display",
+          "PingFang SC", "Microsoft YaHei", sans-serif;
+        background:
+          radial-gradient(circle at 50% 0%, rgba(222, 53, 49, 0.08), transparent 24rem),
+          linear-gradient(180deg, #fbfbf8 0%, var(--paper) 54%, #ecece7 100%);
+        color: var(--ink);
+      }
+
+      main {
+        width: min(100%, 760px);
+        margin: 0 auto;
+        padding: max(30px, env(safe-area-inset-top)) 22px 48px;
+      }
+
+      nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+        margin-bottom: 44px;
+        font-size: 13px;
+        font-weight: 850;
+      }
+
+      a {
+        color: inherit;
+        text-underline-offset: 4px;
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        text-decoration: none;
+      }
+
+      .lamp {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background: rgba(222, 53, 49, 0.12);
+        border: 1px solid rgba(222, 53, 49, 0.22);
+        position: relative;
+      }
+
+      .lamp::after {
+        content: "";
+        position: absolute;
+        inset: 7px;
+        border-radius: 50%;
+        background: var(--accent);
+        box-shadow: 0 0 16px rgba(222, 53, 49, 0.42);
+      }
+
+      .panel {
+        border-radius: 28px;
+        padding: clamp(24px, 5vw, 42px);
+        background: rgba(255, 255, 255, 0.64);
+        border: 1px solid rgba(32, 35, 34, 0.08);
+        box-shadow: 0 30px 70px rgba(31, 35, 35, 0.1);
+      }
+
+      h1 {
+        margin: 0 0 10px;
+        font-size: clamp(34px, 8vw, 62px);
+        line-height: 0.96;
+        letter-spacing: 0;
+      }
+
+      .date {
+        margin: 0 0 30px;
+        color: var(--muted);
+        font-size: 13px;
+        font-weight: 780;
+      }
+
+      h2 {
+        margin: 30px 0 10px;
+        padding-top: 22px;
+        border-top: 1px solid var(--line);
+        font-size: 15px;
+        letter-spacing: 0;
+      }
+
+      p,
+      li {
+        color: #424642;
+        font-size: 15px;
+        line-height: 1.8;
+        font-weight: 620;
+      }
+
+      ul {
+        margin: 10px 0 0;
+        padding-left: 20px;
+      }
+
+      .note {
+        margin-top: 32px;
+        border-left: 3px solid var(--accent);
+        padding-left: 14px;
+        color: var(--muted);
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <nav>
+        <a class="brand" href="./">
+          <span class="lamp" aria-hidden="true"></span>
+          <span>Void Radio</span>
+        </a>
+        <a href="support.html">支持与反馈</a>
+      </nav>
+
+      <section class="panel">
+        <h1>隐私政策</h1>
+        <p class="date">最后更新：2026 年 7 月 7 日</p>
+
+        <p>
+          Void Radio 是一个零账号、零后端优先的网络收音机。我们尽量让播放、收藏、精选电台库、地图发现和分享都在你的设备本地完成。
+        </p>
+
+        <h2>我们不收集的内容</h2>
+        <ul>
+          <li>不要求注册账号。</li>
+          <li>不运营 Void Radio 自有用户数据库。</li>
+          <li>不收集通讯录、照片、麦克风录音或本地文件。</li>
+          <li>不把你的收藏列表、喜欢列表、坏源标记上传到 Void Radio 服务器。</li>
+        </ul>
+
+        <h2>位置权限</h2>
+        <p>
+          当你使用“附近电台”或“地球背面电台”时，App 可能请求系统定位权限，用来在设备本地计算附近坐标、对跖点坐标，并向公共电台目录查询匹配电台。你可以在系统设置里随时关闭定位权限。
+        </p>
+
+        <h2>第三方数据与直播流</h2>
+        <p>
+          Void Radio 使用 Radio-Browser 等公开电台目录和电台公开直播流。查询国家、城市、附近电台或播放直播流时，第三方服务可能会收到必要的请求信息，例如 IP 地址、查询参数、设备网络信息或浏览器/播放器请求头。这些服务不由 Void Radio 控制。
+        </p>
+
+        <h2>声音明信片与播放链接</h2>
+        <p>
+          当你主动分享播放链接时，链接中可能包含电台名称、地区、频率、坐标、当前曲目文字、直播流地址和备用流地址。收到链接的人可以在浏览器里打开并播放。请只分享你愿意公开的信息。
+        </p>
+
+        <h2>本地存储</h2>
+        <p>
+          App 会在设备本地保存部分偏好设置，例如首页电台库、排序、收藏、喜欢、触感反馈、歌词开关、数据节省模式和坏源标记。卸载 App 通常会删除这些本地数据。
+        </p>
+
+        <h2>联系我们</h2>
+        <p>
+          隐私问题、坏源反馈或删除请求可以发送到
+          <a href="mailto:support@feedar.cc">support@feedar.cc</a>。
+        </p>
+
+        <p class="note">
+          这份政策会随 Void Radio 的功能变化更新。V2 若加入 NAS、网盘、录音或账号能力，会在发布前补充对应隐私说明。
+        </p>
+      </section>
+    </main>
+  </body>
+</html>

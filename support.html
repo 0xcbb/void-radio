@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f5f5f2" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='15' fill='%23f6d8d6'/%3E%3Ccircle cx='16' cy='16' r='6' fill='%23de3531'/%3E%3C/svg%3E" />
+    <title>Void Radio Support</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --accent: #de3531;
+        --paper: #f6f6f2;
+        --ink: #202322;
+        --muted: #737774;
+        --line: #deded8;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family:
+          Inter, -apple-system, BlinkMacSystemFont, "SF Pro Display",
+          "PingFang SC", "Microsoft YaHei", sans-serif;
+        background:
+          radial-gradient(circle at 50% 0%, rgba(222, 53, 49, 0.08), transparent 24rem),
+          linear-gradient(180deg, #fbfbf8 0%, var(--paper) 54%, #ecece7 100%);
+        color: var(--ink);
+      }
+
+      main {
+        width: min(100%, 760px);
+        margin: 0 auto;
+        padding: max(30px, env(safe-area-inset-top)) 22px 48px;
+      }
+
+      nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+        margin-bottom: 44px;
+        font-size: 13px;
+        font-weight: 850;
+      }
+
+      a {
+        color: inherit;
+        text-underline-offset: 4px;
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        text-decoration: none;
+      }
+
+      .lamp {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background: rgba(222, 53, 49, 0.12);
+        border: 1px solid rgba(222, 53, 49, 0.22);
+        position: relative;
+      }
+
+      .lamp::after {
+        content: "";
+        position: absolute;
+        inset: 7px;
+        border-radius: 50%;
+        background: var(--accent);
+        box-shadow: 0 0 16px rgba(222, 53, 49, 0.42);
+      }
+
+      .panel {
+        border-radius: 28px;
+        padding: clamp(24px, 5vw, 42px);
+        background: rgba(255, 255, 255, 0.64);
+        border: 1px solid rgba(32, 35, 34, 0.08);
+        box-shadow: 0 30px 70px rgba(31, 35, 35, 0.1);
+      }
+
+      h1 {
+        margin: 0 0 10px;
+        font-size: clamp(34px, 8vw, 62px);
+        line-height: 0.96;
+        letter-spacing: 0;
+      }
+
+      .lead {
+        margin: 0 0 30px;
+        color: var(--muted);
+        font-size: 15px;
+        line-height: 1.75;
+        font-weight: 700;
+      }
+
+      h2 {
+        margin: 30px 0 10px;
+        padding-top: 22px;
+        border-top: 1px solid var(--line);
+        font-size: 15px;
+        letter-spacing: 0;
+      }
+
+      p,
+      li {
+        color: #424642;
+        font-size: 15px;
+        line-height: 1.8;
+        font-weight: 620;
+      }
+
+      ul {
+        margin: 10px 0 0;
+        padding-left: 20px;
+      }
+
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 48px;
+        margin-top: 12px;
+        border-radius: 999px;
+        padding: 0 18px;
+        color: white;
+        background: var(--accent);
+        box-shadow: 0 18px 36px rgba(222, 53, 49, 0.22);
+        font-size: 14px;
+        font-weight: 850;
+        text-decoration: none;
+      }
+
+      code {
+        border-radius: 8px;
+        padding: 2px 6px;
+        background: rgba(32, 35, 34, 0.07);
+        color: #282b2a;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <nav>
+        <a class="brand" href="./">
+          <span class="lamp" aria-hidden="true"></span>
+          <span>Void Radio</span>
+        </a>
+        <a href="privacy.html">隐私政策</a>
+      </nav>
+
+      <section class="panel">
+        <h1>支持与反馈</h1>
+        <p class="lead">
+          Void Radio 的电台来自公开目录和公开直播流。某些电台会临时失效、换源或变更元数据，欢迎把问题回传给我们修正首选源和默认精选集。
+        </p>
+
+        <a class="button" href="mailto:support@feedar.cc?subject=Void%20Radio%20Feedback">发送反馈邮件</a>
+
+        <h2>报告坏源时请尽量带上</h2>
+        <ul>
+          <li>电台名称，例如 UFM 100.3。</li>
+          <li>所在页面：首页、地图、地球背面或分享落地页。</li>
+          <li>问题现象：无法播放、卡顿、曲目不更新、台标错误、地区错误。</li>
+          <li>设备型号和系统版本，例如 moto G55 / Android 16。</li>
+          <li>如果你有可用备用流，也可以直接贴上 URL。</li>
+        </ul>
+
+        <h2>常见说明</h2>
+        <p>
+          微信、WhatsApp 等聊天 App 通常不会在聊天气泡里直接播放直播音频。Void Radio 的分享链接会先打开网页，用户点击“立即收听”后由浏览器播放，这是移动浏览器的音频安全限制。
+        </p>
+        <p>
+          如果地图定位不可用，请确认系统定位服务已开启，并允许 Void Radio 使用位置权限。定位只用于发现附近电台和计算地球背面坐标。
+        </p>
+
+        <h2>当前测试版本</h2>
+        <p>
+          V1.1 重点验证真实音频、后台播放、地图发现、地球背面电台、声音明信片、床头钟和本地电台库。正式上架前会继续完成签名包、商店资料和真机长测。
+        </p>
+
+        <h2>数据来源</h2>
+        <p>
+          公共目录主要来自 <code>Radio-Browser</code>，直播流由各电台或第三方公开提供。Void Radio 不控制第三方节目内容、广告插播、元数据质量或源站稳定性。
+        </p>
+      </section>
+    </main>
+  </body>
+</html>
