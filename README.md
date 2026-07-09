@@ -60,5 +60,6 @@ DNS 层只需要给子域名加 CNAME 到 Cloudflare Pages / Vercel / GitHub Pag
 
 - `privacy.html`：隐私政策，说明零账号、零后端、定位用途、第三方电台目录和分享链接参数。
 - `support.html`：支持与反馈，供用户报告坏源、缺少电台、定位或播放问题。
+- `legal.html`：数据来源与版权说明，供 Google Play 审核、权利人更正/移除请求和商店描述引用。
 
 App 内设置页的“隐私政策”和“支持与反馈”入口指向这两个公网页面。当前联系邮箱写作 `support@feedar.cc`，正式上架前需要确认该邮箱可正常收信。
