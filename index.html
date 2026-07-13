@@ -299,7 +299,7 @@
           一张从 Void Radio 分享出来的声音明信片。
         </div>
         <div class="coords" id="coords"></div>
-        <a class="app-link" id="appLink" href="#" rel="noreferrer">获取 Void Radio</a>
+        <a class="app-link" id="appLink" href="#" rel="noreferrer">在 Void Radio 打开</a>
       </section>
 
       <footer class="footer">
@@ -328,12 +328,18 @@
       const story = text("story", "我在 Void Radio 发现了一个可以直接收听的网络电台。");
       const stream = text("stream", "");
       const fallback = text("fallback", "");
-      const app = text("app", "");
+      const incomingApp = text("app", "");
       const lat = text("lat", "");
       const lng = text("lng", "");
       const streams = [stream, ...fallback.split("|")]
         .map((value) => value.trim())
         .filter((value, index, array) => value && array.indexOf(value) === index);
+      const appParams = new URLSearchParams();
+      ["station", "place", "freq", "stream", "fallback", "now", "mode", "lat", "lng"].forEach((key) => {
+        const value = params.get(key);
+        if (value && value.trim()) appParams.set(key, value.trim());
+      });
+      const app = incomingApp || (stream ? `voidradio://listen?${appParams.toString()}` : "");
 
       document.title = `${station} · Void Radio`;
       document.getElementById("station").textContent = station;
